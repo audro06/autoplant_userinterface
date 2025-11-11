@@ -1,6 +1,7 @@
 import { Button, VerticalBox, TabWidget, ScrollView, HorizontalBox } from "std-widgets.slint";
 import "./ark-pixel-10px-monospaced-ko.otf";
 import "./dalmoori.ttf";
+import {DashBoard} from "dash.slint";
 
 component KnobCapture inherits FocusScope {
     in-out property <string> text: "";
@@ -71,15 +72,16 @@ export component SpinBox inherits KnobCapture {
 }
 
 component SmallTabWidget inherits VerticalLayout {
+    alignment: stretch;
     in property <[{name: string, id: int}]> tabs: [
-        {name: "home", id: 0},
+        {name: "대시보드", id: 0},
         {name: "menu", id: 1}
     ];
-    alignment: LayoutAlignment.start;
     in-out property <int> selected: 0;
     tab_bar := HorizontalLayout {
         alignment: LayoutAlignment.start;
         KnobCapture { // the tab selector
+            height: 8px;
             text: root.tabs[root.selected].name;
             accessible-role: AccessibleRole.tab-list;
             accessible-action-increment => {
@@ -90,68 +92,22 @@ component SmallTabWidget inherits VerticalLayout {
             }
         }
     }
-
     Rectangle {
-        VerticalLayout {
-            visible: root.selected == 0;
-            Text {
-                wrap: TextWrap.word-wrap;
-                text: "한글 출력 테스트 ";
-            }
-            ScrollView {
-                VerticalLayout {
-                    SpinBox {
-                        min: -1;
-                        max: 25;
-                        step: 0.1;
-                    }
-                    SpinBox {
-                        min: -1;
-                        max: 25;
-                        step: 0.1;
-                    }
-                    SpinBox {
-                        min: -1;
-                        max: 25;
-                        step: 0.01;
-                    }
-                    SpinBox {
-                        min: -1;
-                        max: 25;
-                        step: 0.001;
-                    }
-                    SpinBox {
-                        min: -1;
-                        max: 25;
-                        step: 0.0001;
-                    }
-                    SpinBox {
-                        min: -1;
-                        max: 25;
-                        step: 0.01;
-                    }
-                    SpinBox {
-                        min: -1;
-                        max: 25;
-                        step: 0.01;
-                    }
-                }
-            }
+        height: 1px;
+        background: red;
+    }
+    DashBoard{}
+    VerticalLayout {
+        visible: root.selected == 1;
+        Text {
+            wrap: TextWrap.word-wrap;
+            text: "menu screen";
         }
-
-        VerticalLayout {
-            visible: root.selected == 1;
-            Text {
-                wrap: TextWrap.word-wrap;
-                text: "menu screen";
-            }
-            SpinBox {
-                min: -1;
-                max: 25;
-                step: 0.01;
-            }
+        SpinBox {
+            min: -1;
+            max: 25;
+            step: 0.01;
         }
-
     }
 }
 

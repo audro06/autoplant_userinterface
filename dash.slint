@@ -1,0 +1,61 @@
+export component IconBox {
+    in-out property <int> value: 0;
+    Rectangle {
+        width: 38px;
+        height: 12px;
+        HorizontalLayout {
+            width: 100%;
+            height: 100%;
+
+            spacing: 4px; 
+            
+            alignment: center;
+
+            Image {
+                width: 12px;
+                height: 12px;
+                source: @image-url("icons/test.png");
+                accessible-label: "icon";
+            }
+            
+            Text {
+                text: "test";
+                overflow: elide; 
+            }
+        }
+    }
+}
+
+export component DashBoard {
+    Rectangle {
+        background: blue;
+        VerticalLayout {
+            alignment: stretch;
+            Text {
+                wrap: TextWrap.word-wrap;
+                text: "<식물이름>";
+                height: 8px;
+            }
+            Rectangle {
+                border-width: 1px;
+                border-color: black;
+                vertical-stretch: 1.0;
+                GridLayout {
+                    spacing-vertical: 2px;
+                    Row {
+                        IconBox {}
+                        IconBox {}
+                    }
+                    Row {
+                        IconBox {}
+                        IconBox {}
+                    }
+                    Row {
+                        IconBox {}
+                        IconBox {}
+                    }
+                }
+            }
+        }
+    }
+}
